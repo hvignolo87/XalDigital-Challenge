@@ -63,9 +63,9 @@ if __name__ == '__main__':
     num_answered_questions = answered.index.size
     num_no_answered_questions = not_answered.index.size
     print('2) Respuestas contestadas: {}\n' \
-        .format(num_answered_questions) + \
-        'Respuestas no contestadas: {}' \
-        .format(num_no_answered_questions) + '\n')
+          .format(num_answered_questions) + \
+          'Respuestas no contestadas: {}' \
+          .format(num_no_answered_questions) + '\n')
 
 
     """/*** 3. Answer with least number of views ***/"""
@@ -73,10 +73,10 @@ if __name__ == '__main__':
     least_views_qid = row['question_id']
     least_views_link = row['link'][1]
     print('3) El valor "answer_id" para este caso es NaN. '+\
-        'Por lo tanto, la identifico con "question_id" '+\
-        'y con el "link" a la pregunta:\n'+\
-        'question_id: {}\n'.format(least_views_qid)+\
-        'link: {}'.format(least_views_link)+'\n')
+          'Por lo tanto, la identifico con "question_id" '+\
+          'y con el "link" a la pregunta:\n'+\
+          'question_id: {}\n'.format(least_views_qid)+\
+          'link: {}'.format(least_views_link)+'\n')
 
 
     """/*** 4. Older and newest answers ***/"""
@@ -85,19 +85,19 @@ if __name__ == '__main__':
     older_answer_qid = int(rows.iloc[rows.shape[0]-1]['question_id'])
     older_answer_link = rows.iloc[rows.shape[0]-1]['link'][1]
     print('4) Aquí ocurre lo mismo que lo explicado en 3). '+\
-        'Por lo tanto:\nID de la pregunta más actual: {}'\
-        .format(newer_answer_id)+'\n'+\
-        'question_id de la pregunta más vieja: {}'\
-        .format(older_answer_qid)+'\n'+\
-        'link de la pregunta más vieja: {}'\
-        .format(older_answer_link)+'\n')
+          'Por lo tanto:\nID de la pregunta más actual: {}'\
+          .format(newer_answer_id)+'\n'+\
+          'question_id de la pregunta más vieja: {}'\
+          .format(older_answer_qid)+'\n'+\
+          'link de la pregunta más vieja: {}'\
+          .format(older_answer_link)+'\n')
 
 
     """/*** 5. Response of the owner with the highest reputation ***/"""
     row = answered.sort_values(by='reputation', ascending=False)
     res_highest_rep = int(row.iloc[0]['accepted_answer_id'])
     print('5) ID de la respuesta del owner con mayor reputación: {}'\
-        .format(res_highest_rep))
+          .format(res_highest_rep))
     
     # Finish the script
     sys.exit()
