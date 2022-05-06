@@ -46,10 +46,10 @@ if __name__ == '__main__':
 
     # List with the date columns (to convert format later)
     dates_cols = ['last_activity_date',
-                'creation_date',
-                'last_edit_date',
-                'closed_date',
-                'protected_date']
+                  'creation_date',
+                  'last_edit_date',
+                  'closed_date',
+                  'protected_date']
 
     # Convert from timestamp to DateTime
     for key in dates_cols:
