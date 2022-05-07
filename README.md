@@ -15,3 +15,7 @@ gh repo clone hvignolo87/XalDigital-Challenge
 ```
 python coding.py
 ```
+5. Check the answers in the console output.
+
+For SQL challenge:
+- You'll find the questions, the answers and the queries to get that answers in the **sql_challenge.sql** file.
