@@ -103,13 +103,14 @@ HAVING COUNT(dia) =
     GROUP BY dia
     ORDER BY dia ASC
     LIMIT 1
-)
+);
 
--- ¿Cuáles son las aerolíneas que tienen mas de 2 vuelos por día?
+-- ¿Cuáles son las aerolíneas que tienen mas 
+-- de 2 vuelos por día?
 SELECT
 nombre_aerolinea
 FROM aerolineas
 INNER JOIN vuelos
 ON vuelos.id_aerolinea = aerolineas.id_aerolinea
-GROUP BY vuelos.id_aerolinea
+GROUP BY vuelos.id_aerolinea, vuelos.dia
 HAVING COUNT(vuelos.id_aerolinea) > 2;
