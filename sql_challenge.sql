@@ -1,5 +1,5 @@
 -- Create tables and insert data
-CREATE TABLE aerolineas(
+CREATE TABLE IF NOT EXISTS aerolineas(
         id_aerolinea TINYINT(1) NOT NULL,
         nombre_aerolinea VARCHAR(20),
         PRIMARY KEY(id_aerolinea)
@@ -11,7 +11,7 @@ INSERT INTO aerolineas VALUES
 
 SELECT * FROM aerolineas;
 
-CREATE TABLE aeropuertos(
+CREATE TABLE IF NOT EXISTS aeropuertos(
         id_aeropuerto TINYINT(1) NOT NULL,
         nombre_aeropuerto VARCHAR(20),
         PRIMARY KEY(id_aeropuerto)
@@ -23,7 +23,7 @@ INSERT INTO aeropuertos VALUES
 
 SELECT * FROM aeropuertos;
 
-CREATE TABLE movimientos(
+CREATE TABLE IF NOT EXISTS movimientos(
         id_movimiento TINYINT(1) NOT NULL,
         descripcion VARCHAR(20),
         PRIMARY KEY(id_movimiento)
@@ -55,10 +55,61 @@ INSERT INTO vuelos VALUES
 SELECT * FROM vuelos;
 
 
+
+/** -------------- RESPUESTAS -------------- **/
+
+
 -- ¿Cuál es el nombre aeropuerto que ha tenido
 -- mayor movimiento durante el año?
-SELECT id_aeropuerto, MAX(id_max_mov)
-FROM (
-    SELECT id_aeropuerto, COUNT(id_movimiento) AS id_max_mov
-    FROM vuelos GROUP BY id_aeropuerto
+SELECT nombre_aeropuerto
+FROM aeropuertos
+INNER JOIN vuelos
+ON vuelos.id_aeropuerto = aeropuertos.id_aeropuerto
+GROUP BY vuelos.id_aeropuerto
+HAVING COUNT(vuelos.id_movimiento) = 
+(
+    SELECT COUNT(id_movimiento) AS mov_count
+    FROM vuelos
+    GROUP BY id_aeropuerto
+    ORDER BY mov_count DESC 
+    LIMIT 1
 );
+
+
+-- ¿Cuál es el nombre aerolínea que ha realizado
+-- mayor número de vuelos durante el año?
+SELECT nombre_aerolinea
+FROM aerolineas
+INNER JOIN vuelos
+ON vuelos.id_aerolinea = aerolineas.id_aerolinea
+GROUP BY vuelos.id_aerolinea
+HAVING COUNT(vuelos.id_movimiento) = 
+(
+    SELECT COUNT(id_movimiento) AS mov_count
+    FROM vuelos
+    GROUP BY id_aerolinea
+    ORDER BY mov_count DESC 
+    LIMIT 1
+);
+
+-- ¿En qué día se han tenido mayor número de vuelos?
+SELECT dia 
+FROM vuelos
+GROUP BY dia
+HAVING COUNT(dia) = 
+(
+    SELECT COUNT(dia)
+    FROM vuelos 
+    GROUP BY dia
+    ORDER BY dia ASC
+    LIMIT 1
+)
+
+-- ¿Cuáles son las aerolíneas que tienen mas de 2 vuelos por día?
+SELECT
+nombre_aerolinea
+FROM aerolineas
+INNER JOIN vuelos
+ON vuelos.id_aerolinea = aerolineas.id_aerolinea
+GROUP BY vuelos.id_aerolinea
+HAVING COUNT(vuelos.id_aerolinea) > 2;
