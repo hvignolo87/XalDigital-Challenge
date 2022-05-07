@@ -5,12 +5,12 @@ Author: Hernán Vignolo \<<vignolo.hernan@gmail.com>\>
 
 ## Usage
 For coding challenge:
-1. Open a Git CLI.
+1. Open a Git bash, and navigate to the repository where you want the cloned directory to be added.
 2. Clone this repository in your computer. For this, copy&paste the following command:
 ```
-gh repo clone hvignolo87/XalDigital-Challenge
+$ git clone https://github.com/hvignolo87/XalDigital-Challenge.git
 ```
-3. Navigate to the folder in your computer.
+3. Open a CLI or a Powershell and navigate to the folder in your computer.
 4. Run the following command:
 ```
 python coding.py
